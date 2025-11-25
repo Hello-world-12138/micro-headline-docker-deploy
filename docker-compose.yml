@@ -13,7 +13,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   backend:
-    image: grokhelper/micro-headline-backend:latest   # 我已经帮你建好镜像！
+    image: grokhelper/micro-headline-backend:latest   
     restart: always
     ports:
       - "8080:8080"
@@ -21,7 +21,7 @@ services:
       - mysql
 
   frontend:
-    image: grokhelper/micro-headline-frontend:latest  # 我也建好了！
+    image: grokhelper/micro-headline-frontend:latest  
     restart: always
     ports:
       - "80:80"
