@@ -10,18 +10,22 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql   
 
   backend:
-    image: grokhelper/micro-headline-backend:latest   
+    image: grokhelper/micro-headline-backend:latest
     restart: always
     ports:
       - "8080:8080"
     depends_on:
       - mysql
+    environment:                                        
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/headline_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
 
   frontend:
-    image: grokhelper/micro-headline-frontend:latest  
+    image: grokhelper/micro-headline-frontend:latest
     restart: always
     ports:
       - "80:80"
